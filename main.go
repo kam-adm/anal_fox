@@ -8,7 +8,9 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
+	"time"
 )
 
 func main() {
@@ -43,7 +45,19 @@ func Aggregation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(req.Seller.Rv)
+	fmt.Println(req.Seller)
+	fmt.Println(req.Product)
+
+	for i, priceHistory := range req.PriceHistory {
+		f, err := strconv.ParseInt(strconv.Itoa(priceHistory.Dt), 10, 64)
+		rub := int(priceHistory.Price.RUB) / 100
+		if err != nil {
+			panic(err)
+		}
+		tm := time.Unix(f, 0)
+		fmt.Println(i, tm)
+		fmt.Println(i, rub, "RUB")
+	}
 
 	for i, sclad := range req.Compositions {
 		fmt.Println(i, sclad)

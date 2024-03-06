@@ -1,7 +1,7 @@
 package models
 
 type Composition struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
-	Type int    `json:"type"`
+	Id   int    `json:"id"`   // id Склада
+	Name string `json:"name"` // Название склада
+	Type int    `json:"type"` // тип склада
 }
